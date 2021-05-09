@@ -1,0 +1,188 @@
+<app-header (featureSelected)="onNavigate($event)"></app-header>
+
+<div class="container-fluid">
+    <div class="col-md-4 col-md-offset-4">
+        
+        <h4 style="text-align:right; margin-right: 10px;">Customer Id: {{ cid }}</h4>
+        <h1>Loan Application Form</h1>
+        <form id="loanForm" [formGroup]="loanForm" (ngSubmit)="submit()">
+            
+            <div class="form-group ">
+                <div [ngClass]="{ 'has-error': isSubmitted && formControls.loantype.errors }">
+                    <label class="label" class="label" for="loantype">Loan type</label>
+                    <select class="form-control select2" formControlName="loantype" type="text" style="width: 100px;" [(ngModel)]="preOption">
+                        <option value="education">Education</option>
+                        <option value="personal" selected>Personal</option>
+                    </select>        
+                </div>
+                
+                <div *ngIf="isSubmitted && formControls.loantype.errors" class="help-block">
+                    <div class="alert" *ngIf="formControls.loantype.errors.required">loantype is required</div>
+                </div>
+            </div>
+            
+            
+            <div class="form-group ">
+                <div [ngClass]="{ 'has-error': isSubmitted && formControls.loanamount.errors }">
+                    <label class="label" for="loanamount">Loan amount</label>
+                    <input id="loanamount"  formControlName="loanamount" placeholder="Rs." type="text" class="form-control" />
+                </div>
+                
+                <div *ngIf="isSubmitted && formControls.loanamount.errors" class="help-block">
+                    <div class="alert" *ngIf="formControls.loanamount.errors.required">Loan Amount is required</div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-xs-12 col-12 col-md-6 form-group ">
+                    <div [ngClass]="{ 'has-error': isSubmitted && formControls.loanApplyDate.errors }">
+                        <label class="label" for="loanApplyDate">Loan apply date</label>
+                        <input formControlName="loanApplyDate" type="date" max="{{date | date:'yyyy-MM-dd'}}" class="form-control" />
+                    </div>
+                    
+                    <div *ngIf="isSubmitted && formControls.loanApplyDate.errors" class="help-block">
+                        <div class="alert" *ngIf="formControls.loanApplyDate.errors.required">loanApplyDate is required</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-xs-12 col-12 col-md-6 form-group ">
+                    <div [ngClass]="{ 'has-error': isSubmitted && formControls.loanIssueDate.errors }">
+                        <label class="label" for="loanIssueDate">Loan issue date</label>
+                        <input formControlName="loanIssueDate" type="date" placeholder="Loan app" class="form-control" />
+                    </div>
+                    
+                    <div *ngIf="isSubmitted && formControls.loanIssueDate.errors" class="help-block">
+                        <div class="alert" *ngIf="formControls.loanIssueDate.errors.required">loanIssueDate is required</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group ">
+                <div [ngClass]="{ 'has-error': isSubmitted && formControls.rate.errors }">
+                    <label class="label" for="rate">Rate of Interest</label>
+                    <input id="rate"  formControlName="rate" type="number" placeholder="%" class="form-control" />
+                </div>
+                
+                <div *ngIf="isSubmitted && formControls.rate.errors" class="help-block">
+                    <div class="alert" *ngIf="formControls.rate.errors.required">Rate of the interest is required</div>
+                </div>
+            </div>
+            
+            <div class="form-group ">
+                <div [ngClass]="{ 'has-error': isSubmitted && formControls.loanDuration.errors }">
+                    <label class="label" for="loanDuration">Duration of the loan</label>
+                    <select class="form-control select2" formControlName="loanDuration" type="text" style="width: 100px;" [(ngModel)]="duration">
+                        <option value="5">5</option>
+                        <option value="10" selected>10</option>
+                        <option value="15" selected>15</option>
+                        <option value="20" selected>20</option>
+                    </select>        
+                </div>
+                
+                <div *ngIf="isSubmitted && formControls.loanDuration.errors" class="help-block">
+                    <div class="alert" class="alert" *ngIf="formControls.loanDuration.errors.required">Loan duration is required</div>
+                </div>
+            </div>
+            
+            <div class="form-group ">
+                <ng-container *ngIf="preOption == 'education'">
+                    <hr>
+                    <h3>Education loan</h3>
+                    <div class="form-group ">
+                        <label class="label" for="courseFee">Course Fee</label>
+                        <input id="courseFee" type="number" class="form-control" />
+                        
+                    </div>
+                    
+                    <div class="form-group ">
+                        <label class="label" for="courseName">Course name</label>
+                        <input id="courseName"  type="text" class="form-control" />
+                        
+                    </div>
+                    
+                    <div class="form-group ">
+                        <label class="label" for="fatherName">Father name</label>
+                        <input id="fatherName" type="text" class="form-control" />
+                        
+                    </div>
+                    
+                    <div class="form-group ">
+                        <label class="label" for="fatherOcc">Father Occupation</label>
+                        <input id="fatherOcc" type="text" class="form-control" />
+                        
+                        
+                    </div>
+                    
+                    <div class="form-group ">
+                        <label class="label" for="fatherExp">Father's total experience</label>
+                        <input id="fatherExp" type="number" class="form-control" />
+                        
+                    </div>
+                    
+                    <div class="form-group ">
+                        <label class="label" for="fatherExpCurr">Father's experience with current company</label>
+                        <input id="fatherExpCurr"  type="number" class="form-control" />
+                        
+                    </div>
+                    
+                    <div class="form-group ">
+                        <label class="label" for="ration">Ration card number</label>
+                        <input id="ration" type="number" class="form-control" />
+                        
+                    </div>
+                    
+                    <div class="form-group ">
+                        <label class="label" for="annualInc">Annual income</label>
+                        <input id="annualInc"  type="number" class="form-control" />
+                        
+                    </div>
+                </ng-container>
+            </div>
+            
+            <div class="form-group ">
+                <ng-container *ngIf="preOption == 'personal'">
+                    <hr>
+                    <h3>Personal loan</h3>
+                    
+                    
+                    <div class="form-group ">
+                        <label class="label" for="annualIncome">Annual income</label>
+                        <input id="annualIncome" type="number" class="form-control" />
+                        
+                        
+                    </div>
+                    
+                    
+                    <div class="form-group ">
+                        <label class="label" for="companyName">Comapny name</label>
+                        <input id="companyName"  type="text" class="form-control" />
+                        
+                    </div>
+                    
+                    <div class="form-group ">
+                        <label class="label" for="designation">Designation</label>
+                        <input id="designation"  type="text" class="form-control" />
+                    </div>
+                    
+                    <div class="form-group ">
+                        <label class="label" for="totalExp">Total experience</label>
+                        <input id="totalExp" type="number" class="form-control" />
+                        
+                    </div>
+                    
+                    <div class="form-group ">
+                        <label class="label" for="currExp">Experience with current company</label>
+                        <input id="currExp" type="number" class="form-control" />
+                        
+                    </div>
+                    
+                    
+                </ng-container>
+            </div>
+            
+            <button mat-raised-button class="btn btn-primary" type="submit">Apply Loan</button>
+        </form>
+    </div>
+</div>

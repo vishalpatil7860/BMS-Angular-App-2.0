@@ -1,0 +1,31 @@
+<h1 style="text-align:center">
+   Login Form 
+</h1>
+
+
+<section class="login-form">
+  <form id="loginForm" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" [formGroup]="loginForm" (ngSubmit)="login()">
+   
+
+      
+      <mat-form-field>
+          <input type="text" autofocus matInput placeholder="Your Username" formControlName="username">
+          <mat-error >Field must not be Empty!</mat-error>
+      </mat-form-field>
+   
+      <mat-form-field hintLabel="Should be atleast 6 characters long!">
+          <input type="password" matInput placeholder="Your Password" formControlName="password" minlength="6">
+          <mat-error>Should be atleast 6 characters long!</mat-error>
+      </mat-form-field>
+      
+   
+      <button type="submit" class="button" mat-raised-button color="primary">Log In</button>
+      <div *ngIf="[invalidcredentials]" style="color: red; font-size: 14px;">
+        <div [hidden]="invalidcredentials === false" style="text-align: center;">
+          Invalid credentials
+        </div>
+      </div>
+      <p>New User? <a routerLink="/register"> Signup</a></p>
+  </form>
+</section>
+

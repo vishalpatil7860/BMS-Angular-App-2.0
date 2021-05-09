@@ -1,0 +1,44 @@
+button{
+    background: rgb(1, 29, 51);
+    border-color: transparent;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container-fluid {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding-bottom: 70px;
+}
+
+.alert {
+    margin-top: 5px;
+    color: red;
+}
+
+#loanForm {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    width: 60%;
+}
+
+.label {
+    text-align: left;
+    font-weight: bold;
+
+}
+
+
+.form-control {
+    margin-left: 20px;
+}
+
+.form-group {
+    margin: 30px;
+    text-align: center;
+}
