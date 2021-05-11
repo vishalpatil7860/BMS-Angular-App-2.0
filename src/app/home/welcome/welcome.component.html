@@ -3,9 +3,14 @@
 
 <div class="welcome" fxLayout="column" fxLayoutAlign="center center">
     <section>
-        <h1>
-            Welcome to Indian Banking Management System!
+        <h1 *ngIf="auth.user$ | async as user; else loggedOut">
+            Welcome {{user.name}}!
         </h1>
-        <p>One stop to apply for a Loan!!!</p>
+        <p>IBMS - One stop to apply for a Loan!!!</p>
+        <ng-template #loggedOut>
+            <h2>
+            </h2>       
+            <p>Please Login to Access the Features of the Website!</p>
+        </ng-template>
     </section>
 </div>

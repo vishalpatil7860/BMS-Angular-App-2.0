@@ -1,188 +1,231 @@
 <app-header (featureSelected)="onNavigate($event)"></app-header>
 
-<div class="container-fluid">
-    <div class="col-md-4 col-md-offset-4">
-        
-        <h4 style="text-align:right; margin-right: 10px;">Customer Id: {{ cid }}</h4>
-        <h1>Loan Application Form</h1>
-        <form id="loanForm" [formGroup]="loanForm" (ngSubmit)="submit()">
-            
-            <div class="form-group ">
-                <div [ngClass]="{ 'has-error': isSubmitted && formControls.loantype.errors }">
-                    <label class="label" class="label" for="loantype">Loan type</label>
-                    <select class="form-control select2" formControlName="loantype" type="text" style="width: 100px;" [(ngModel)]="preOption">
-                        <option value="education">Education</option>
-                        <option value="personal" selected>Personal</option>
-                    </select>        
-                </div>
-                
-                <div *ngIf="isSubmitted && formControls.loantype.errors" class="help-block">
-                    <div class="alert" *ngIf="formControls.loantype.errors.required">loantype is required</div>
-                </div>
-            </div>
-            
-            
-            <div class="form-group ">
-                <div [ngClass]="{ 'has-error': isSubmitted && formControls.loanamount.errors }">
-                    <label class="label" for="loanamount">Loan amount</label>
-                    <input id="loanamount"  formControlName="loanamount" placeholder="Rs." type="text" class="form-control" />
-                </div>
-                
-                <div *ngIf="isSubmitted && formControls.loanamount.errors" class="help-block">
-                    <div class="alert" *ngIf="formControls.loanamount.errors.required">Loan Amount is required</div>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-xs-12 col-12 col-md-6 form-group ">
-                    <div [ngClass]="{ 'has-error': isSubmitted && formControls.loanApplyDate.errors }">
-                        <label class="label" for="loanApplyDate">Loan apply date</label>
-                        <input formControlName="loanApplyDate" type="date" max="{{date | date:'yyyy-MM-dd'}}" class="form-control" />
-                    </div>
-                    
-                    <div *ngIf="isSubmitted && formControls.loanApplyDate.errors" class="help-block">
-                        <div class="alert" *ngIf="formControls.loanApplyDate.errors.required">loanApplyDate is required</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-xs-12 col-12 col-md-6 form-group ">
-                    <div [ngClass]="{ 'has-error': isSubmitted && formControls.loanIssueDate.errors }">
-                        <label class="label" for="loanIssueDate">Loan issue date</label>
-                        <input formControlName="loanIssueDate" type="date" placeholder="Loan app" class="form-control" />
-                    </div>
-                    
-                    <div *ngIf="isSubmitted && formControls.loanIssueDate.errors" class="help-block">
-                        <div class="alert" *ngIf="formControls.loanIssueDate.errors.required">loanIssueDate is required</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="form-group ">
-                <div [ngClass]="{ 'has-error': isSubmitted && formControls.rate.errors }">
-                    <label class="label" for="rate">Rate of Interest</label>
-                    <input id="rate"  formControlName="rate" type="number" placeholder="%" class="form-control" />
-                </div>
-                
-                <div *ngIf="isSubmitted && formControls.rate.errors" class="help-block">
-                    <div class="alert" *ngIf="formControls.rate.errors.required">Rate of the interest is required</div>
-                </div>
-            </div>
-            
-            <div class="form-group ">
-                <div [ngClass]="{ 'has-error': isSubmitted && formControls.loanDuration.errors }">
-                    <label class="label" for="loanDuration">Duration of the loan</label>
-                    <select class="form-control select2" formControlName="loanDuration" type="text" style="width: 100px;" [(ngModel)]="duration">
-                        <option value="5">5</option>
-                        <option value="10" selected>10</option>
-                        <option value="15" selected>15</option>
-                        <option value="20" selected>20</option>
-                    </select>        
-                </div>
-                
-                <div *ngIf="isSubmitted && formControls.loanDuration.errors" class="help-block">
-                    <div class="alert" class="alert" *ngIf="formControls.loanDuration.errors.required">Loan duration is required</div>
-                </div>
-            </div>
-            
-            <div class="form-group ">
-                <ng-container *ngIf="preOption == 'education'">
-                    <hr>
-                    <h3>Education loan</h3>
-                    <div class="form-group ">
-                        <label class="label" for="courseFee">Course Fee</label>
-                        <input id="courseFee" type="number" class="form-control" />
-                        
-                    </div>
-                    
-                    <div class="form-group ">
-                        <label class="label" for="courseName">Course name</label>
-                        <input id="courseName"  type="text" class="form-control" />
-                        
-                    </div>
-                    
-                    <div class="form-group ">
-                        <label class="label" for="fatherName">Father name</label>
-                        <input id="fatherName" type="text" class="form-control" />
-                        
-                    </div>
-                    
-                    <div class="form-group ">
-                        <label class="label" for="fatherOcc">Father Occupation</label>
-                        <input id="fatherOcc" type="text" class="form-control" />
-                        
-                        
-                    </div>
-                    
-                    <div class="form-group ">
-                        <label class="label" for="fatherExp">Father's total experience</label>
-                        <input id="fatherExp" type="number" class="form-control" />
-                        
-                    </div>
-                    
-                    <div class="form-group ">
-                        <label class="label" for="fatherExpCurr">Father's experience with current company</label>
-                        <input id="fatherExpCurr"  type="number" class="form-control" />
-                        
-                    </div>
-                    
-                    <div class="form-group ">
-                        <label class="label" for="ration">Ration card number</label>
-                        <input id="ration" type="number" class="form-control" />
-                        
-                    </div>
-                    
-                    <div class="form-group ">
-                        <label class="label" for="annualInc">Annual income</label>
-                        <input id="annualInc"  type="number" class="form-control" />
-                        
-                    </div>
-                </ng-container>
-            </div>
-            
-            <div class="form-group ">
-                <ng-container *ngIf="preOption == 'personal'">
-                    <hr>
-                    <h3>Personal loan</h3>
-                    
-                    
-                    <div class="form-group ">
-                        <label class="label" for="annualIncome">Annual income</label>
-                        <input id="annualIncome" type="number" class="form-control" />
-                        
-                        
-                    </div>
-                    
-                    
-                    <div class="form-group ">
-                        <label class="label" for="companyName">Comapny name</label>
-                        <input id="companyName"  type="text" class="form-control" />
-                        
-                    </div>
-                    
-                    <div class="form-group ">
-                        <label class="label" for="designation">Designation</label>
-                        <input id="designation"  type="text" class="form-control" />
-                    </div>
-                    
-                    <div class="form-group ">
-                        <label class="label" for="totalExp">Total experience</label>
-                        <input id="totalExp" type="number" class="form-control" />
-                        
-                    </div>
-                    
-                    <div class="form-group ">
-                        <label class="label" for="currExp">Experience with current company</label>
-                        <input id="currExp" type="number" class="form-control" />
-                        
-                    </div>
-                    
-                    
-                </ng-container>
-            </div>
-            
-            <button mat-raised-button class="btn btn-primary" type="submit">Apply Loan</button>
-        </form>
+<div class="container-fluid bodybackground">
+    <div class="row" style="margin-bottom: 30px; margin-top: 10px;">
+      <div class="col-md-12">
+      </div>
     </div>
+   
+    
+    <div class="row" align="center">
+      <div class="form-content">
+          <form id="Loanform" [formGroup]="loanInfo" class="form-horizontal" role="form"> 
+          <table class="tablestyle">
+            <tr>
+              <td class="tdcenter"><label for="loanType">Loan Type:</label></td>
+              <td><select class="form-control" name="loanType" id="loanType" formControlName="loanType" [(ngModel)]="optionValue"
+                (change)="onSelect($event.target.value)">
+                  <option class="form-control" value="Education">Education</option>
+                  <option class="form-control" value="Personal">Personal</option>
+              </select>
+              <div *ngIf="!loanType?.valid && (loanType?.dirty || loanType?.touched)" class="errorAlert">
+                  <div [hidden]="!loanType.errors.required">
+                    &nbsp; Loan Type is required
+                  </div>
+              </div>
+              </td>
+          </tr>
+          <br>
+            <tr>
+              <td class="tdcenter"><label for="loanAmt">Loan Amount:</label></td>
+              <td><input class="form-control" type="text" id="loanAmt" name="loanAmt" formControlName="loanAmt">
+                  <div *ngIf="!loanAmt?.valid && (loanAmt?.dirty || loanAmt?.touched)" class="errorAlert">
+                      <div [hidden]="!loanAmt.errors.required">
+                        &nbsp; Loan Amount is required
+                      </div>
+                      <div [hidden]="!loanAmt.errors.pattern">
+                       Enter numeric value
+                    </div>
+                  </div>
+              </td>
+          </tr>
+          <br>
+          <tr>
+            <td class="tdcenter"><label for="applyDate">Loan Apply Date:</label></td> 
+            <td><input class="form-control" type="date" id="applyDate" name="applyDate" formControlName="applyDate"
+               max="{{date | date: 'yyyy-MM-dd' }}">
+                <div *ngIf="!applyDate?.valid && (applyDate?.dirty || applyDate?.touched)" class="errorAlert">
+                    <div [hidden]="!applyDate.errors.required">
+                      &nbsp; Loan Apply Date is required
+                    </div>
+                </div>
+            </td>
+          </tr>
+          <br>
+          <tr>
+            <td class="tdcenter"><label for="rateOfInterest">Rate of Interest:</label></td> 
+            <td><input class="form-control" type="text" id="rateOfInterest" name="rateOfInterest" formControlName="rateOfInterest"
+              [(ngModel)]="ROI">
+                <div *ngIf="!rateOfInterest?.valid && (rateOfInterest?.dirty || rateOfInterest?.touched)" class="errorAlert">
+                    <div [hidden]="!rateOfInterest.errors.required">
+                      &nbsp; ROI is required
+                    </div>
+                </div>
+            </td>
+          </tr>
+          <br>
+          <tr>
+            <td class="tdcenter"><label for="duration">Duartion:</label></td> 
+            <td><select class="form-control" name="duration" id="duration" formControlName="duration">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+            </select>
+                <div *ngIf="!duration?.valid && (duration?.dirty || duration?.touched)" class="errorAlert">
+                    <div [hidden]="!duration.errors.required">
+                      &nbsp; Duartion is required
+                    </div>
+                </div>
+            </td>
+          </tr>
+          <br>
+   
+
+      <ng-container *ngIf="optionValue == 'Education'">
+              <tr>
+                <td class="tdcenter"><label for="courseFee">Course Fee:</label></td>
+                <td><input class="form-control" type="text" id="courseFee" name="courseFee" formControlName="courseFee">
+                    <div *ngIf="!courseFee?.valid && (courseFee?.dirty || courseFee?.touched)" class="errorAlert">
+                        <div [hidden]="!courseFee.errors.required">
+                          &nbsp; Course Fee is required
+                        </div>
+                        <div [hidden]="!courseFee.errors.pattern">
+                          Enter numeric value
+                       </div>
+                    </div>
+                </td>
+              </tr>
+              <br>
+              <tr>
+                <td class="tdcenter"><label for="course">Course:</label></td>
+                <td><input class="form-control" type="text" id="course" name="course" formControlName="course">
+                    <div *ngIf="!course?.valid && (course?.dirty || course?.touched)" class="errorAlert">
+                        <div [hidden]="!course.errors.required">
+                          &nbsp; Course is required
+                        </div>
+                    </div>
+                </td>
+              </tr>
+              <br>
+              <tr>
+                <td class="tdcenter"><label for="fatherOcc">Father Occupation:</label></td>
+                <td><input class="form-control" type="text" id="fatherOcc" name="fatherOcc" formControlName="fatherOcc">
+                    <div *ngIf="!fatherOcc?.valid && (fatherOcc?.dirty || fatherOcc?.touched)" class="errorAlert">
+                        <div [hidden]="!fatherOcc.errors.required">
+                          &nbsp; Father Occupation is required
+                        </div>
+                        
+                    </div>
+                </td>
+              </tr>
+              <br>
+              <tr>
+                <td class="tdcenter"><label for="experience">Father Experience:</label></td>
+                <td><input class="form-control" type="text" id="experience" name="experience" formControlName="experience">
+                    <div *ngIf="!experience?.valid && (experience?.dirty || experience?.touched)" class="errorAlert">
+                        <div [hidden]="!experience.errors.required">
+                          &nbsp; Father Experience is required
+                        </div>
+                        <div [hidden]="!experience.errors.pattern">
+                          Enter numeric value
+                       </div>   
+                    </div>
+                </td>
+              </tr>
+              <br>
+              <tr>
+                <td class="tdcenter"><label for="rationCard">Ration Card Number</label></td>
+                <td><input class="form-control" type="text" id="rationCard" name="rationCard" formControlName="rationCard">
+                    <div *ngIf="!rationCard?.valid && (rationCard?.dirty || rationCard?.touched)" class="errorAlert">
+                        <div [hidden]="!rationCard.errors.required">
+                          &nbsp; Ration Card Number is required
+                        </div>
+                    </div>
+                </td>
+              </tr>
+              <br>
+              <tr>
+                <td class="tdcenter"><label for="fatherAnnualIncome">Father's Annual Income:</label></td>
+                <td><input class="form-control" type="text" id="fatherAnnualIncome" name="fatherAnnualIncome" formControlName="fatherAnnualIncome">
+                    <div *ngIf="!fatherAnnualIncome?.valid && (fatherAnnualIncome?.dirty || fatherAnnualIncome?.touched)" class="errorAlert">
+                        <div [hidden]="!fatherAnnualIncome.errors.required">
+                          &nbsp; Father Annaul Income is required
+                        </div>
+                        <div [hidden]="!fatherAnnualIncome.errors.pattern">
+                          Enter numeric value
+                       </div>
+                    </div>
+                </td>
+              </tr>
+              <br>
+            
+            </ng-container>
+             
+        <ng-container *ngIf="optionValue == 'Personal'">
+              <tr>
+                <td class="tdcenter"><label for="annualIncome">Annual Income:</label></td>
+                <td><input class="form-control" type="text" id="annualIncome" name="annualIncome" formControlName="annualIncome">
+                    <div *ngIf="!annualIncome?.valid && (annualIncome?.dirty || annualIncome?.touched)" class="errorAlert">
+                        <div [hidden]="!annualIncome.errors.required">
+                          &nbsp;Annaul Income is required
+                        </div>
+                        <div [hidden]="!annualIncome.errors.pattern">
+                          Enter numeric value
+                       </div>
+                    </div>
+                </td>
+              </tr>
+              <br>
+              <tr>
+                <td class="tdcenter"><label for="companyName">Company Name:</label></td>
+                <td><input class="form-control" type="text" id="companyName" name="companyName" formControlName="companyName">
+                    <div *ngIf="!companyName?.valid && (companyName?.dirty || companyName?.touched)" class="errorAlert">
+                        <div [hidden]="!companyName.errors.required">
+                          &nbsp;Company Name is required
+                        </div>
+                    </div>
+                </td>
+              </tr>
+              <br>
+              <tr>
+                <td class="tdcenter"><label for="designation">Designation:</label></td>
+                <td><input class="form-control" type="text" id="designation" name="designation" formControlName="designation">
+                    <div *ngIf="!designation?.valid && (designation?.dirty || designation?.touched)" class="errorAlert">
+                        <div [hidden]="!designation.errors.required">
+                          &nbsp;Designation is required
+                        </div>
+                    </div>
+                </td>
+              </tr>
+              <br>
+              <tr>
+                <td class="tdcenter"><label for="perosnalExperience">Personal Experience:</label></td>
+                <td><input class="form-control" type="text" id="perosnalExperience" name="perosnalExperience" formControlName="perosnalExperience">
+                    <div *ngIf="!perosnalExperience?.valid && (perosnalExperience?.dirty || perosnalExperience?.touched)" class="errorAlert">
+                        <div [hidden]="!perosnalExperience.errors.required">
+                          &nbsp;Experience is required
+                        </div>
+                        <div [hidden]="!perosnalExperience.errors.pattern">
+                          Enter numeric value
+                       </div>
+                    </div>
+                </td>
+              </tr>
+              <br>
+         
+            </ng-container>
+
+          </table>
+          
+          <button type="button" class="btn btn-lg commonButton"
+           (click)="submit()">
+         Apply for Loan
+          </button>
+          </form>
+        </div>
+
+    </div>
+    
+  
 </div>

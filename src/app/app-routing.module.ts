@@ -11,14 +11,16 @@ import { UpdateSuccessComponent } from './home/update-success/update-success.com
 
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: 'login'},
+  // {path: '', pathMatch: 'full', redirectTo: 'login'},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'loan', component: LoanComponent, canActivate: [AuthGuard] },
   {path: 'update', component: UpdateComponent},
   {path: 'success', component: SuccessComponent},
   {path: 'updateSuccess', component: UpdateSuccessComponent},
-  {path: 'welcome', component: WelcomeComponent}
+  {path: '', component: WelcomeComponent},
+  {path: 'welcome', component: WelcomeComponent},
+  {path: '**', component: WelcomeComponent}
 
 ];
 

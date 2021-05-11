@@ -61,16 +61,14 @@ export class UpdateComponent implements OnInit {
     this._http
       .get("http://localhost:3000/users")
       .subscribe((result) => {
-      this.object2=result;
-      for(let items of this.object2){
-        // this.object3.push(items);
-        if(items.username==localStorage.getItem('ACCESS_TOKEN')){
-          console.log(items);
-          this.details=items;
+        this.object2=result;
+        for(let items of this.object2){
+          // this.object3.push(items);
+          if(items.username==localStorage.getItem('ACCESS_TOKEN')){
+            console.log(items);
+            this.details=items;
+          }
         }
-
-      }
-      
       })
   }
   get formControls(){
@@ -82,16 +80,24 @@ export class UpdateComponent implements OnInit {
   }
 
   submit(){
+    if(this.updateForm.invalid){
+      return;
+    }
     console.log(this.details);
     var url="http://localhost:3000/users/"+this.details.id;
     console.log(url);
     this._http.put<any>(url, this.details).subscribe();
     this.isSubmitted = true;
-    if(this.updateForm.invalid){
-      return;
-    }
 
     this.router.navigateByUrl('/updateSuccess');
   }
 
+
+  loadedFeature = 'update';
+
+  onNavigate(feature:string){
+    this.loadedFeature = feature;
+  }
+  
+  
 }

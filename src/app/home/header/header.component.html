@@ -2,9 +2,19 @@
 <mat-toolbar color="primary">
     
     <div><a routerLink="/welcome">IBMS</a></div>
-    <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>  
+    <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs >  
         <ul fxLayout fxLayoutGap="20px" class="navigation-items">
-            <li><a role="presentation" routerLink="/loan" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Loan Section</a></li>
-            <li><a role="presentation" routerLink="/update" routerLinkActive="active">Update Profile</a></li>
-            <li><a style="cursor: pointer;" (click)="logout()">Logout</a></li>
-        </ul>
+            
+            <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+                <!-- <button mat-raised-button (click)="auth.logout({ returnTo: document.location.origin })"> -->
+                    <!-- Log out -->
+                    <!-- </button> -->
+                    <li><a role="presentation"  routerLink="/loan" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" >Loan Section</a></li>
+                    <li><a role="presentation"  routerLink="/update" routerLinkActive="active">Update Profile</a></li>
+                    <li><a style="cursor: pointer;" (click)="auth.logout({ returnTo: document.location.origin })">Logout</a></li>
+                </ng-container>
+                
+                <ng-template #loggedOut>
+                    <li><a style="cursor: pointer;" (click)="auth.loginWithRedirect()">Login</a></li>
+                </ng-template>
+            </ul>

@@ -6,23 +6,23 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-
+export class AuthService2 {
+  [x: string]: any;
+  
   cid1;
   object2;
   
-
-
+  
+  
   constructor(private _http:HttpClient,private router: Router) { }
-
+  
   public login(userInfo: User){
-
+    
     this._http
-      .get("http://localhost:3000/users")
-      .subscribe((result) => {
+    .get("http://localhost:3000/users")
+    .subscribe((result) => {
       this.object2=result;
       for(let items of this.object2){
-        // this.object3.push(items);
         if(items.username==userInfo['username'] && items.password==userInfo['password']){
           console.log("ok");
           localStorage.setItem('ACCESS_TOKEN', items.username);
@@ -31,19 +31,20 @@ export class AuthService {
         }
       }
       return false;
-      })
-
+    })
+    
   }
-
+  
   public isLoggedIn(){
     return localStorage.getItem('ACCESS_TOKEN') !== null;
   }
-
+  
   public logout(){
     localStorage.removeItem('ACCESS_TOKEN');
   }
-
+  
   public cust(cid){
     this.cid1=cid;
   }
+  
 }

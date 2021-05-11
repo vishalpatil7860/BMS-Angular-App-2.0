@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonService } from '../../services/common.service';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService2 } from 'src/app/services/auth.service';
 import { Country } from '../../services/country';
 import { SelectService } from '../../services/select.service';
 import { State } from '../../services/state';
@@ -15,7 +15,7 @@ import { NgForm } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private authService: AuthService,private commonService: CommonService,private selectService: SelectService, private router: Router,private formBuilder: FormBuilder) { }
+  constructor(private authService: AuthService2,private commonService: CommonService,private selectService: SelectService, private router: Router,private formBuilder: FormBuilder) { }
 
   isSubmitted = false;
   isValid = true;
@@ -28,7 +28,8 @@ export class RegisterComponent implements OnInit {
   date = new Date;
   age;
 
-
+  formGroup: FormGroup;
+  
   ngOnInit(): void {
     this.countries = this.selectService.getCountries();
     this.onSelect(this.selectedCountry.id);
@@ -64,7 +65,7 @@ export class RegisterComponent implements OnInit {
   }
   get formControls(){
     return this.registerForm.controls;
-  }
+  } 
 
   addUser(formObj){
     console.log(formObj);
@@ -99,14 +100,24 @@ export class RegisterComponent implements OnInit {
   }
 
   onAccountType(accType){
-    if(accType=='saving'){
-      this.registerForm.patchValue({deposit: '5000'});
+    if(accType === 'saving'){
+      this.registerForm.patchValue({deposit: "5000"});
     }
-    else {
-      this.registerForm.patchValue({deposit: '0'});
+    if(accType ==='salary'){
+      this.registerForm.patchValue({deposit: "0"});
     }
   }
   
+  // goToLogin() {
+  //   console.log(this.registerForm.value)
+  //   if(this.registerForm.invalid)
+  //     return;
+  //   this.commonService.createUser(this.registerForm.value).subscribe((response)=>{
+  //       console.log("Customer has been registered")
+  //   })
+  //   this.router.navigateByUrl("/login")
+  // }
+
   submit(){
     this.addUser(this.registerForm.value);
     this.isSubmitted = true;

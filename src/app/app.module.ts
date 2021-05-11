@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SuccessComponent } from './home/success/success.component';
 import { WelcomeComponent } from './home/welcome/welcome.component';
 import { UpdateSuccessComponent } from './home/update-success/update-success.component';
+import { AuthModule } from '@auth0/auth0-angular';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,11 @@ import { UpdateSuccessComponent } from './home/update-success/update-success.com
     ReactiveFormsModule,
     HttpClientModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    AuthModule.forRoot({
+      domain: 'dev-t3f2xuti.us.auth0.com',
+      clientId: 'Hfepwf0wHdV6J61jGTmZb7AqrZXZH0r1'
+    }),
   ],
   providers: [SelectService],
   bootstrap: [AppComponent]
