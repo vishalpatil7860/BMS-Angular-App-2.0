@@ -139,7 +139,7 @@ describe('UpdateComponent', () => {
     component.updateForm.controls['referaddress'].setValue('Pune');
     component.updateForm.controls['id'];
     component.submit();
-
+ 
     fixture.detectChanges();
     expect(spy).toHaveBeenCalledWith('/updateSuccess');
   });
