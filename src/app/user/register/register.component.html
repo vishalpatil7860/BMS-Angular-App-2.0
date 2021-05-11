@@ -1,3 +1,4 @@
+<app-header (featureSelected)="onNavigate($event)"></app-header>
 
 <div class="container">
   
@@ -233,9 +234,14 @@
         </div>
       </div>
       
-      <button class="btn btn-primary" type="submit" >Register</button>
+      <button class="btn btn-primary" (click)="auth.loginWithRedirect()" type="submit" >Confirm Credentials</button>
       
     </form>
     <p>Already have login click here to <a routerLink="/login">Login</a></p>
+    
+    <p>
+      <h3>OR</h3>
+    <p>
+    <button mat-raised-button color="primary" (click)="auth.loginWithRedirect()">OAuth Login</button>
   </div>
 </div>

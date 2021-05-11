@@ -7,6 +7,7 @@ import { Country } from '../../services/country';
 import { SelectService } from '../../services/select.service';
 import { State } from '../../services/state';
 import { NgForm } from '@angular/forms';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,7 @@ import { NgForm } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private authService: AuthService2,private commonService: CommonService,private selectService: SelectService, private router: Router,private formBuilder: FormBuilder) { }
+  constructor(private authService: AuthService2,public auth: AuthService, private commonService: CommonService,private selectService: SelectService, private router: Router,private formBuilder: FormBuilder) { }
 
   isSubmitted = false;
   isValid = true;
@@ -125,6 +126,11 @@ export class RegisterComponent implements OnInit {
       return;
     }
     this.router.navigateByUrl('/login');
+  }
+
+  loadedFeature = 'register';
+  onNavigate(feature:string){
+    this.loadedFeature = feature;
   }
 
 }

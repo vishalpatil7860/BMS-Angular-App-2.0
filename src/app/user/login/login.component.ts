@@ -5,7 +5,7 @@ import { AuthService2 } from 'src/app/services/auth.service';
 import { User } from  'src/app/services/user';
 import { DateAdapter } from '@angular/material/core';
 import { AuthService } from '@auth0/auth0-angular';
-
+  
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -39,14 +39,18 @@ export class LoginComponent implements OnInit {
    this.authService.login(this.loginForm.value);
   }
 
-  login(){
-    console.log(this.loginForm.value);
-    this.isSubmitted = true;
-    if(this.loginForm.invalid){
-      return;
-    }
-    this.authService.login(this.loginForm.value);
-    this.invalidcredentials=true;
-  }
+  // login(){
+  //   console.log(this.loginForm.value);
+  //   this.isSubmitted = true;
+  //   if(this.loginForm.invalid){
+  //     return;
+  //   }
+  //   this.authService.login(this.loginForm.value);
+  //   this.invalidcredentials=true;
+  // }
+
+ 
+
+  
 
 }

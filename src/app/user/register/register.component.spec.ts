@@ -14,6 +14,7 @@ import { AppRoutingModule } from '../../app-routing.module' ;
 import { CommonService } from 'src/app/services/common.service';
 import { of } from 'rxjs/internal/observable/of';
 import { Observable } from 'rxjs-compat';
+import { AuthModule } from '@auth0/auth0-angular';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -31,6 +32,10 @@ describe('RegisterComponent', () => {
         RouterModule.forRoot([]),
         ReactiveFormsModule,
         MaterialModule,
+        AuthModule.forRoot({
+          domain: 'dev-t3f2xuti.us.auth0.com',
+          clientId: 'Hfepwf0wHdV6J61jGTmZb7AqrZXZH0r1'
+        }),
         AppRoutingModule
       ],
       providers:[SelectService]
@@ -59,6 +64,13 @@ describe('RegisterComponent', () => {
     expect(component).toBeTruthy();
   });
   
+  it('[Navigation  to Loan Section Check]: Should redirect to corresponding page',()=>{
+    let router = TestBed.inject(Router);
+    let spy = spyOn(router, 'navigateByUrl');
+    component.onNavigate('register');
+    fixture.detectChanges();
+    expect(component.loadedFeature).toEqual('register');
+  });
   
   // it('[Register Form Creation]: should create a FormGroup comprised of FormControls', () => {
   //   component.ngOnInit();

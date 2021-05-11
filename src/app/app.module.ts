@@ -29,7 +29,7 @@ import { AuthModule } from '@auth0/auth0-angular';
     UpdateComponent,
     SuccessComponent,
     WelcomeComponent,
-    UpdateSuccessComponent
+    UpdateSuccessComponent,
   ],
   imports: [
     BrowserModule,

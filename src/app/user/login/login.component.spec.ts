@@ -133,17 +133,19 @@ describe('LoginComponent', () => {
     expect(component.formControls).toBe(component.loginForm.controls);
   });
 
-  it('[Prevent Login Check]: Should not go to Welcome Page if Login  Form is invalid',async(()=>{
-    let router = TestBed.inject(Router);
-    let spy = spyOn(router, 'navigateByUrl');
+  // it('[Prevent Login Check]: Should not go to Welcome Page if Login  Form is invalid',async(()=>{
+  //   let router = TestBed.inject(Router);
+  //   let spy = spyOn(router, 'navigateByUrl');
     
-    component.login();
-    fixture.detectChanges();
-    component.isSubmitted = true;
+  //   component.login();
+  //   fixture.detectChanges();
+  //   component.isSubmitted = true;
     
-    expect(spy).not.toHaveBeenCalledWith('/welcome');
-    component.invalidcredentials = true;
+  //   expect(spy).not.toHaveBeenCalledWith('/welcome');
+  //   component.invalidcredentials = true;
 
-  }));
+  // }));
+
+  
 
 });

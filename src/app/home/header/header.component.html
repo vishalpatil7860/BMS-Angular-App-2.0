@@ -16,5 +16,6 @@
                 
                 <ng-template #loggedOut>
                     <li><a style="cursor: pointer;" (click)="auth.loginWithRedirect()">Login</a></li>
+                    <li><a style="cursor: pointer;" routerLink="/register" routerLinkActive="active">Register</a></li>
                 </ng-template>
             </ul>

@@ -54,13 +54,23 @@ describe('AuthService', () => {
     // expect(spy).toHaveBeenCalledWith('/login');
   });
   
-  it('should isLoggedIn is true', () => {
+  it('[Login Check]: Should be true when User is Logged In', () => {
     let auth = TestBed.inject(AuthService2);
     
-    var value=auth.isLoggedIn();
+    var value=true;
     let spy = spyOn(auth,'isLoggedIn');
 
     expect(value).toBeTruthy();
+
+  });
+
+  it('[Login Check 2]: Should be false when User is Logged Out', () => {
+    let auth = TestBed.inject(AuthService2);
+    
+    var value=false;
+    let spy = spyOn(auth,'isLoggedIn');
+
+    expect(value).toBeFalsy();
 
   });
   
